@@ -6,6 +6,7 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+        FormPerpustakaan.koleksi.getkategori.Clear()
         bookpicture.Load(FormPerpustakaan.koleksi.GSFotoBuku)
         bookpicture.SizeMode = PictureBoxSizeMode.StretchImage
         dtp_tanggalmasuk.Format = DateTimePickerFormat.Custom
@@ -37,7 +38,7 @@
                 cb_budaya.Checked() = True
             End If
         Next
-        FormPerpustakaan.koleksi.resetkategori()
+
     End Sub
 
     Private Sub btn_tambahgambar_Click(sender As Object, e As EventArgs) Handles btn_tambahgambar.Click

@@ -210,7 +210,7 @@ Public Class Koleksi
                                   jenis_koleksi AS 'Jenis Koleksi',
                                   tahun_terbit AS 'Tahun Terbit',
                                   lokasi AS 'Lokasi Rak',
-                                  tanggal_masuk_koleksi AS 'Tanggal Masuk',
+                                  DATE_FORMAT(tanggal_masuk_koleksi,'%Y/%m/%d') AS 'Tanggal Masuk',
                                   stock AS 'Stock',
                                   bahasa AS 'Bahasa',
                                   kategori as 'Kategori'
@@ -286,7 +286,7 @@ Public Class Koleksi
                                 jenis_koleksi,
                                 tahun_terbit,
                                 lokasi,
-                                tanggal_masuk_koleksi,
+                                DATE_FORMAT(tanggal_masuk_koleksi,'%Y/%m/%d'),
                                 stock,
                                 bahasa,
                                 kategori
@@ -326,13 +326,13 @@ Public Class Koleksi
                                                   stock As String,
                                                   bahasa As String,
                                                   kategori As String)
-        tahun_terbit = tahun_terbit.ToString("yyyy")
+        tahun_terbit = tahun_terbit.ToString()
         dbConn.ConnectionString = "server =" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database
 
-        Try
-            dbConn.Open()
+        'Try
+        dbConn.Open()
             sqlCommand.Connection = dbConn
-            sqlQuery = "UPDATE koleksi SET" &
+        sqlQuery = "UPDATE koleksi SET " &
                         "nama_koleksi='" & nama_koleksi & "', " &
                         "dir_gambar='" & dir_gambar & "', " &
                         "deskripsi='" & deskripsi & "', " &
@@ -340,24 +340,24 @@ Public Class Koleksi
                         "jenis_koleksi='" & jenis_koleksi & "', " &
                         "tahun_terbit='" & tahun_terbit & "', " &
                         "lokasi='" & lokasi & "', " &
-                        "tanggal_masuk_koleksi='" & tanggal_masuk_koleksi & "', " &
+                        "tanggal_masuk_koleksi='" & tanggal_masuk_koleksi.ToString("yyyy/MM/dd") & "', " &
                         "stock='" & stock & "', " &
                         "bahasa='" & bahasa & "', " &
-                        "kategori='" & kategori & "', " &
+                        "kategori='" & kategori & "' " &
                         "WHERE id_koleksi='" & ID & "'"
 
-            sqlCommand = New MySqlCommand(sqlQuery, dbConn)
+        sqlCommand = New MySqlCommand(sqlQuery, dbConn)
             sqlRead = sqlCommand.ExecuteReader
 
             dbConn.Close()
             sqlRead.Close()
             dbConn.Close()
 
-        Catch ex As Exception
-            Return ex.Message
-        Finally
+            'Catch ex As Exception
+            'Return ex.Message
+            'Finally
             dbConn.Dispose()
-        End Try
+        'End Try
     End Function
 
     Public Function DeleteDataKoleksiByIDDatabase(ID As Integer)
