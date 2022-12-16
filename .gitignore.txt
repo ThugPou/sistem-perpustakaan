@@ -1,0 +1,4 @@
+.vs/
+nama_project/bin/
+nama_project/obj/Debug
+nama_project/obj/Release
