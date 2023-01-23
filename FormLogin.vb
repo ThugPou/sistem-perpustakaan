@@ -1,4 +1,5 @@
 ﻿Public Class FormLogin
+
     Public Shared users As Users
 
     Public Sub New()
@@ -16,12 +17,22 @@
         'Dim Encrypted As String = Users. EncryptData(plainPassword)
         'MessageBox.Show(Encrypted)
 
-        Dim AuthStatus As Boolean = users.CheckAuth(plainUsername, plainPassword)
-        'MessageBox.Show(AuthStatus)
-        If AuthStatus Then
+        Dim data_users As List(Of String) = users.CheckAuthDatabase(plainUsername, plainPassword)
+
+        'Dim AuthStatus As Boolean = users.CheckAuth(plainUsername, plainPassword)
+        ''MessageBox.Show(AuthStatus)
+        'If AuthStatus Then
+        '    FormPerpustakaan.Show()
+        'Else
+        '    MessageBox.Show("Wrong Password")
+        'End If
+
+        If data_users.Count > 0 Then
+            users.GSUsername = data_users(1)
             FormPerpustakaan.Show()
+            Me.Hide()
         Else
-            MessageBox.Show("Wrong Password")
+            MessageBox.Show("Salah Password")
         End If
     End Sub
 
